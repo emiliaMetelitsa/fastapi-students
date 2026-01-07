@@ -26,9 +26,6 @@ SessionLocal: sessionmaker[Session] = sessionmaker(
 def get_db() -> Session:
     """
     Контекстный генератор для работы с сессией SQLAlchemy.
-
-    Yields:
-        Session: сессия SQLAlchemy
     """
     db = SessionLocal()
     try:
@@ -37,4 +34,5 @@ def get_db() -> Session:
         logger.exception("Ошибка сессии базы данных")
         raise exc
     finally:
+
         db.close()
