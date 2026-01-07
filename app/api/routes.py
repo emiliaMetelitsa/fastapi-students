@@ -16,7 +16,7 @@ def get_db():
         db.close()
 
 
-# ---------- CREATE ----------
+# Создать
 @router.post("/students")
 def create_student(data: StudentCreate, db: Session = Depends(get_db)):
     return service.create_student(db, data.name)
@@ -27,7 +27,7 @@ def create_group(data: GroupCreate, db: Session = Depends(get_db)):
     return service.create_group(db, data.title)
 
 
-# ---------- GET BY ID ----------
+# Получить студента по ID
 @router.get("/students/{student_id}")
 def get_student(student_id: int, db: Session = Depends(get_db)):
     student = db.get(models.Student, student_id)
@@ -44,7 +44,7 @@ def get_group(group_id: int, db: Session = Depends(get_db)):
     return group
 
 
-# ---------- DELETE ----------
+# Удалить студента
 @router.delete("/students/{student_id}")
 def delete_student(student_id: int, db: Session = Depends(get_db)):
     student = db.get(models.Student, student_id)
@@ -65,7 +65,7 @@ def delete_group(group_id: int, db: Session = Depends(get_db)):
     return {"status": "deleted"}
 
 
-# ---------- LIST ----------
+# Список
 @router.get("/students")
 def list_students(db: Session = Depends(get_db)):
     return db.query(models.Student).all()
@@ -76,7 +76,7 @@ def list_groups(db: Session = Depends(get_db)):
     return db.query(models.Group).all()
 
 
-# ---------- GROUP OPERATIONS ----------
+# Операции с группами
 @router.post("/groups/{group_id}/students/{student_id}")
 def add_student(group_id: int, student_id: int, db: Session = Depends(get_db)):
     if not service.add_student_to_group(db, student_id, group_id):
