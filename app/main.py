@@ -9,5 +9,5 @@ logger = logging.getLogger(__name__)
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Students API", version="1.0.0")
+app = FastAPI(title="Students API")
 app.include_router(router)
